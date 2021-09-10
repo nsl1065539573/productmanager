@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.productmanager.user.mapper.UserMapper">
+    <insert id="insert" parameterType="com.example.productmanager.user.DO.UserDO">
+        insert into sys_user(USERNAME, PASSWORD, NAME, TIME_CREATED, TIME_UPDATED) values (#{username}, #{password}, #{name}, now(), now());
+    </insert>
+</mapper>
