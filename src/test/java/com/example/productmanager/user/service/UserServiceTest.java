@@ -1,5 +1,6 @@
 package com.example.productmanager.user.service;
 
+import com.example.productmanager.ProductmanagerApplication;
 import com.example.productmanager.user.DO.UserDO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
  * @Author: nansongling
  * @Date: 2021/9/10 4:12 下午
  **/
-@SpringBootTest
+@SpringBootTest(classes = ProductmanagerApplication.class)
 public class UserServiceTest {
   @Autowired
   private UserService userService;

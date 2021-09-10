@@ -2,6 +2,8 @@ package com.example.productmanager.user.service;
 
 import com.example.productmanager.user.DO.UserDO;
 import com.example.productmanager.user.mapper.UserMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,11 +13,14 @@ import org.springframework.stereotype.Service;
  **/
 @Service
 public class UserService {
+  private final static Logger logger = LoggerFactory.getLogger(UserService.class);
+
   @Autowired
   private UserMapper userMapper;
 
   public void insert(UserDO userDO) {
     System.out.println("insert...");
+    logger.info("insert...{}", userDO);
     userMapper.insert(userDO);
     System.out.println("insert success...");
   }
