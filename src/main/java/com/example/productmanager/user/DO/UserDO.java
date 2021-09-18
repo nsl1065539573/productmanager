@@ -18,7 +18,7 @@ public class UserDO {
 
   public static UserDO from(UserVO userVO) {
     UserDO res = new UserDO();
-    res.username = userVO.getUserName();
+    res.username = userVO.getUsername();
     res.password = userVO.getPassword();
     res.name = userVO.getNickname();
     return res;

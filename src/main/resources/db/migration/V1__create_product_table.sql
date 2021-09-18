@@ -43,8 +43,8 @@ create table sys_user
 (
     ID           BIGINT(20) primary key auto_increment COMMENT 'id',
     USERNAME     VARCHAR(24) unique COMMENT '登录用户名',
-    PASSWORD     VARCHAR(64) COMMENT '密码',
-    NAME         VARCHAR(10) unique COMMENT '昵称',
+    PASSWORD     VARCHAR(64) NOT NULL COMMENT '密码',
+    NAME         VARCHAR(10) NOT NULL COMMENT '昵称',
     TIME_CREATED BIGINT(20) NOT NULL COMMENT '创建时间',
     TIME_UPDATED BIGINT(20) NOT NULL COMMENT '最后一次更新时间'
 ) charset = 'utf8' comment '用户表';

@@ -5,6 +5,7 @@ public enum NslExceptionType {
   PARAM_ERROR("1001", "参数异常"),
   USER_NOT_EXIST("1002", "用户不存在"),
   PASSWORD_ERROR("1003", "密码错误"),
+  USER_ALREADY_EXIST("1004", "用户已存在"),
   ;
 
   public String code;

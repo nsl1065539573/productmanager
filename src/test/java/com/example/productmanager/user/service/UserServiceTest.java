@@ -1,18 +1,14 @@
 package com.example.productmanager.user.service;
 
 import com.example.productmanager.BaseTest;
-import com.example.productmanager.ProductmanagerApplication;
 import com.example.productmanager.user.DO.UserDO;
 import com.example.productmanager.user.VO.UserVO;
-import com.example.productmanager.user.mapper.UserMapper;
-import com.example.productmanager.utils.DigestUtil;
 import com.example.productmanager.utils.exception.NslException;
 import com.example.productmanager.utils.exception.NslExceptionType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 
 /**
  * @Author: nansongling
@@ -39,7 +35,7 @@ public class UserServiceTest extends BaseTest {
     UserVO user = new UserVO("abcd", "123456", "张三");
     userService.register(user);
     UserVO userVO = new UserVO();
-    userVO.setUserName("abcd");
+    userVO.setUsername("abcd");
     userVO.setPassword("123456");
     String token = userService.login(userVO);
     if (token == null) {

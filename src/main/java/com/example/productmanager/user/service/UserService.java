@@ -32,7 +32,7 @@ public class UserService {
   }
 
   public String login(UserVO userVO) {
-    String username = userVO.getUserName();
+    String username = userVO.getUsername();
     String password = userVO.getPassword();
     if (StringUtils.isEmpty(username) || password.isEmpty()) {
       throw new NslException(NslExceptionType.PARAM_ERROR, "username or password is null, username: %s, password: %s", StringUtils.isEmpty(username), StringUtils.isEmpty(password));
@@ -51,8 +51,12 @@ public class UserService {
   }
 
   public void register(UserVO userVO) {
-    if (userVO == null || StringUtils.isEmpty(userVO.getUserName()) || StringUtils.isEmpty(userVO.getPassword()) || StringUtils.isEmpty(userVO.getNickname())) {
+    if (userVO == null || StringUtils.isEmpty(userVO.getUsername()) || StringUtils.isEmpty(userVO.getPassword()) || StringUtils.isEmpty(userVO.getNickname())) {
       throw new NslException(NslExceptionType.PARAM_ERROR, "必填字段为空");
+    }
+    UserDO user = userMapper.getByUsername(userVO.getUsername());
+    if (user != null) {
+      throw new NslException(NslExceptionType.USER_ALREADY_EXIST, "用户已存在");
     }
     userVO.setPassword(DigestUtil.MD5(userVO.getPassword()));
     userMapper.insert(UserDO.from(userVO));

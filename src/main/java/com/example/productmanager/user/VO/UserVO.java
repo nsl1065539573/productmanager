@@ -8,14 +8,14 @@ import lombok.Data;
  **/
 @Data
 public class UserVO {
-  private String userName;
+  private String username;
   private String password;
   private String nickname;
 
   public UserVO() {}
 
   public UserVO(String userName, String password, String nickname) {
-    this.userName = userName;
+    this.username = userName;
     this.password = password;
     this.nickname = nickname;
   }
