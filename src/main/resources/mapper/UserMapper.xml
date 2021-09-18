@@ -6,4 +6,19 @@
     <insert id="insert" parameterType="com.example.productmanager.user.DO.UserDO">
         insert into sys_user(USERNAME, PASSWORD, NAME, TIME_CREATED, TIME_UPDATED) values (#{username}, #{password}, #{name}, now(), now());
     </insert>
+
+    <select id="queryByUsernameAndPassword" parameterType="com.example.productmanager.user.DO.UserDO" resultMap="userDO">
+        select * from sys_user where username = #{username} and password = #{password}
+    </select>
+
+    <select id="getByUsername" parameterType="java.lang.String" resultMap="userDO">
+        select * from sys_user where username = #{username}
+    </select>
+
+    <delete id="deleteAll">
+        delete from sys_user
+    </delete>
+
+    <resultMap id="userDO" type="com.example.productmanager.user.DO.UserDO">
+    </resultMap>
 </mapper>

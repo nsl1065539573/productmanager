@@ -17,4 +17,9 @@ public class NslException extends RuntimeException{
     this.code = type.code;
     this.desc = String.format(format, objs);
   }
+
+  public NslException(NslExceptionType type) {
+    this.code = type.code;
+    this.desc = type.desc;
+  }
 }
