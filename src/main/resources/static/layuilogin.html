@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>login</title>
+    <!-- 引入 layui.css -->
+    <link rel="stylesheet" href="layui/css/layui.css">
+
+    <script charset="utf-8" src="js/jquery-3.6.0.min.js"></script>
+    <script src="layui/layui.js"></script>
+</head>
+
+<body>
+    <div class="layui-container">
+        <div class="layui-row" style="height: 250px;">
+
+        </div>
+        <div class="layui-row">
+            <div class="layui-col-md4" style="height: 1px;">
+                <!-- 占位 -->
+            </div>
+            <div id="main_area" class="layui-col-md4">
+                <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+                    <ul class="layui-tab-title">
+                      <li onclick="choose_login()" class="li_group layui-this">登录</li>
+                      <li onclick="choose_register()" class="li_group">注册</li>
+                    </ul>
+                  </div>
+                <div id="login_area">
+                    <label for="username"></label><input id="username" type="text" name="username" placeholder="请输入用户名"
+                                                         class="layui-input common-input">
+                    <label for="password"></label><input id="password" type="password" placeholder="请输入密码" class="layui-input common-input">
+                    <button type="button" class="layui-btn common-input">登录</button>
+                </div>
+                <div id="register_area">
+                    <input id="username_r" type="text" name="username_r" placeholder="请输入用户名" 
+                    class="layui-input common-input">
+                    <input id="password_r" type="password" placeholder="请输入密码" class="layui-input common-input">
+                    <input id="confirm" type="password" placeholder="请确认密码" class="layui-input common-input">
+                    <input id="nickname" type="text" placeholder="请输入昵称" class="layui-input common-input">
+                    <button type="button" class="layui-btn common-input">注册</button>
+                </div>
+            </div>
+            <div class="layui-col-md4">
+                <!-- 占位 -->
+            </div>
+        </div>
+    </div>
+    <style>
+        body {
+            background: url("image/login_background4.jpeg") no-repeat center center fixed;
+            /*兼容浏览器版本*/
+            -webkit-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+
+        #main_area {
+            height: 300px;
+            background-color: #e2e2e2;
+            opacity:0.9;
+        }
+
+        .common-input {
+            width: 80%;
+            margin-top: 10px;
+        }
+
+        #register_area {
+            width: 100%;
+            height: 90%;
+            display: none;
+            padding-left: 10%;
+            padding-right: 10%;
+        }
+
+        #login_area {
+            width: 100%;
+            height: 90%;
+            padding-left: 10%;
+            padding-right: 10%;
+        }
+
+        .button_group {
+            width: 50%;
+            height: 100%;
+            border: none;
+            display: inline;
+            margin: 0%;
+        }
+    </style>
+    <script>
+        layui.use(['layer'], function () {
+            var layer = layui.layer
+            layer.msg('adsad')
+        });
+
+        function choose_login() {
+            $("#login_area").css("display", "block");
+            $("#register_area").css("display", "none");
+        }
+
+        function choose_register() {
+            $("#login_area").css("display", "none");
+            $("#register_area").css("display", "block");
+        }
+    </script>
+</body>
+
+</html>
