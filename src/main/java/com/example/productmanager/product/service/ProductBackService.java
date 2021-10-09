@@ -40,4 +40,12 @@ public class ProductBackService {
       throw new NslException(NslExceptionType.UNKNOWN_ERROR, "插入失败，请联系开发人员");
     }
   }
+
+  /**
+   * 根据商品名模糊查询
+   */
+  public List<ProductVo> fuzzyQueryProductByName(String fuzzyName) {
+    List<ProductDO> productDOS = productMapper.fuzzyQueryProductByName(fuzzyName);
+    return productDOS.stream().map(ProductVo::from).collect(Collectors.toList());
+  }
 }
