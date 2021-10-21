@@ -17,4 +17,6 @@ public interface ProductMapper {
   ProductDO getProductByName(@Param("name") String name);
 
   List<ProductDO> fuzzyQueryProductByName(@Param("fuzzyName") String fuzzyName);
+
+  List<ProductDO> findByNames(@Param("nameList") List<String> names);
 }

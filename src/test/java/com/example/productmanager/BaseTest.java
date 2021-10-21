@@ -1,12 +1,15 @@
 package com.example.productmanager;
 
 import com.example.productmanager.common.mapper.CommonMapper;
+import com.example.productmanager.product.DO.ProductDO;
+import com.example.productmanager.product.mapper.ProductMapper;
 import com.example.productmanager.utils.exception.NslException;
 import com.example.productmanager.utils.exception.NslExceptionType;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -19,6 +22,12 @@ import java.util.Objects;
 public class BaseTest {
   @Autowired
   private CommonMapper commonMapper;
+
+  @Autowired
+  protected ProductMapper productMapper;
+
+  public String productName;
+  public Long productId;
 
   @Test
   public void clearDB() {
@@ -33,5 +42,15 @@ public class BaseTest {
     if (!Objects.equals(a, b)) {
       throw new NslException(NslExceptionType.NOT_EQUALS, "expect is %s, current is %s", a, b);
     }
+  }
+
+  public void setProduct() {
+    ProductDO productDO = new ProductDO();
+    productDO.setName("testProduct");
+    productDO.setPrice(BigDecimal.TEN);
+    productMapper.addProduct(productDO);
+    productDO = productMapper.getProductByName("testProduct");
+    this.productId = productDO.getId();
+    this.productName = productDO.getName();
   }
 }

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.productmanager.inventory.mapper.InventoryMapper">
+    <insert id="batchInsert" parameterType="com.example.productmanager.inventory.DO.InventoryDO">
+        INSERT INTO product_inventory(PRODUCT_ID, PRODUCT_PURCHASING_PRICE, QUANTITY, TIME_CREATED, TIME_UPDATE) VALUES
+        <foreach collection="inventoryDOS" separator="," item="item">
+            (#{item.productId},#{item.productPurchasingPrice},#{item.quantity},#{item.timeCreated},#{item.timeUpdated})
+        </foreach>
+    </insert>
+
+    <select id="listAll" resultType="com.example.productmanager.inventory.DO.InventoryDO">
+        select * from product_inventory
+    </select>
+</mapper>

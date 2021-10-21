@@ -7,6 +7,9 @@ public enum NslExceptionType {
   PASSWORD_ERROR("1003", "密码错误"),
   USER_ALREADY_EXIST("1004", "用户已存在"),
 
+  // 库存模块
+  PRODUCT_NOT_EXIST("2001", "商品不存在"),
+
   // UT模块
   NOT_EQUALS("2001", "结果与预想值不同"),
   UNKNOWN_ERROR("9999", "未知异常"),

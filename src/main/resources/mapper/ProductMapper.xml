@@ -18,4 +18,11 @@
     <select id="fuzzyQueryProductByName" parameterType="java.lang.String" resultType="com.example.productmanager.product.DO.ProductDO">
         select * from product where NAME like '%${fuzzyName}%'
     </select>
+
+    <select id="findByNames" resultType="com.example.productmanager.product.DO.ProductDO">
+        select * from product where NAME in 
+        <foreach collection="nameList" item="name" open="(" close=")" separator=",">
+            #{name}
+        </foreach>
+    </select>
 </mapper>
