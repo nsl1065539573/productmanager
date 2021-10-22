@@ -3,6 +3,7 @@ create table product
     ID           BIGINT(20) primary key auto_increment COMMENT 'id',
     NAME         VARCHAR(128) unique COMMENT '商品名',
     PRICE        DECIMAL(14, 4) COMMENT '商品价格',
+    STATUS       VARCHAR(1) COMMENT '商品状态',
     TIME_CREATED BIGINT(20) COMMENT '创建时间',
     TIME_UPDATED BIGINT(20) COMMENT '最后一次更新时间'
 ) charset = 'utf8' comment '商品表';

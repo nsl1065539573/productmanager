@@ -2,6 +2,7 @@ package com.example.productmanager.product.service;
 
 import com.example.productmanager.product.DO.ProductDO;
 import com.example.productmanager.product.VO.ProductVo;
+import com.example.productmanager.product.enums.ProductStatus;
 import com.example.productmanager.product.mapper.ProductMapper;
 import com.example.productmanager.utils.exception.NslException;
 import com.example.productmanager.utils.exception.NslExceptionType;
@@ -31,13 +32,30 @@ public class ProductBackService {
    * 新增商品
    */
   public void addProduct(ProductVo origin) {
+    // 新增商品的status都先给NORMAL
+    origin.setProductStatus(ProductStatus.NORMAL);
     ProductDO existed = productMapper.getProductByName(origin.getName());
     if (existed != null) {
-      throw new NslException(NslExceptionType.PARAM_ERROR, "商品名称已存在");
+      if (existed.getStatus().equals(ProductStatus.DELETED.code)) {
+        ProductDO temp = new ProductDO();
+        temp.setId(existed.getId());
+        temp.setStatus(ProductStatus.NORMAL.code);
+        productMapper.update(temp);
+      } else {
+        throw new NslException(NslExceptionType.PARAM_ERROR, "商品名称已存在");
+      }
+    } else {
+      Integer res = productMapper.addProduct(ProductDO.from(origin));
+      if (res != 1) {
+        throw new NslException(NslExceptionType.UNKNOWN_ERROR, "插入失败，请联系开发人员");
+      }
     }
-    Integer res = productMapper.addProduct(ProductDO.from(origin));
+  }
+
+  public void deleteProduct(Long id) {
+    Integer res = productMapper.delete(id);
     if (res != 1) {
-      throw new NslException(NslExceptionType.UNKNOWN_ERROR, "插入失败，请联系开发人员");
+      throw new NslException(NslExceptionType.UNKNOWN_ERROR, "删除失败，请联系开发人员");
     }
   }
 

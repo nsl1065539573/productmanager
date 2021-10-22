@@ -1,6 +1,7 @@
 package com.example.productmanager.product;
 
 import com.example.productmanager.BaseTest;
+import com.example.productmanager.product.DO.ProductDO;
 import com.example.productmanager.product.VO.ProductVo;
 import com.example.productmanager.product.service.ProductBackService;
 import com.example.productmanager.utils.exception.NslException;
@@ -39,6 +40,9 @@ public class ProductBackServiceTest extends BaseTest {
         throw new NslException(NslExceptionType.PARAM_ERROR, "这里应该报这个错");
       }
     }
+    List<ProductDO> productDOS = productMapper.fuzzyQueryProductByName("Z1型水泵");
+    productBackService.deleteProduct(productDOS.get(0).getId());
+    productBackService.addProduct(productVo1);
   }
 
   @Test

@@ -10,6 +10,9 @@ public enum NslExceptionType {
   // 库存模块
   PRODUCT_NOT_EXIST("2001", "商品不存在"),
 
+  // 商品模块
+  PRODUCT_STATUS_CODE_UNKNOWN("3001", "商品未知code"),
+
   // UT模块
   NOT_EQUALS("2001", "结果与预想值不同"),
   UNKNOWN_ERROR("9999", "未知异常"),

@@ -8,7 +8,7 @@
     </select>
 
     <insert id="addProduct" parameterType="com.example.productmanager.product.DO.ProductDO">
-        insert into product(NAME, PRICE, TIME_CREATED, TIME_UPDATED) values(#{name}, #{price}, NOW(), NOW())
+        insert into product(NAME, PRICE, STATUS, TIME_CREATED, TIME_UPDATED) values(#{name}, #{price}, #{status}, NOW(), NOW())
     </insert>
 
     <select id="getProductByName" parameterType="java.lang.String" resultType="com.example.productmanager.product.DO.ProductDO">
@@ -25,4 +25,22 @@
             #{name}
         </foreach>
     </select>
+
+    <update id="update" parameterType="com.example.productmanager.product.DO.ProductDO">
+        update product set TIME_UPDATED = NOW() 
+        <if test="name != null and name != ''">
+            , name = #{name}
+        </if>
+        <if test="price != null">
+            , PRICE = #{price}
+        </if>
+        <if test="status != null and status != ''">
+            , STATUS = #{status}
+        </if>
+        where ID = #{id}
+    </update>
+
+    <update id="delete" parameterType="java.lang.Long">
+        update product set TIME_UPDATED = NOW(), STATUS = 'D' where ID = #{id}
+    </update>
 </mapper>

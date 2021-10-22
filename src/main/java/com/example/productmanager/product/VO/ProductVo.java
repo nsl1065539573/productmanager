@@ -1,6 +1,7 @@
 package com.example.productmanager.product.VO;
 
 import com.example.productmanager.product.DO.ProductDO;
+import com.example.productmanager.product.enums.ProductStatus;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -14,6 +15,7 @@ public class ProductVo {
   private Long id;
   private String name;
   private BigDecimal price;
+  private ProductStatus productStatus;
   private Long timeCreated;
   private Long timeUpdated;
 
@@ -22,6 +24,7 @@ public class ProductVo {
     result.id = origin.getId();
     result.name = origin.getName();
     result.price = origin.getPrice();
+    result.productStatus = ProductStatus.fromCodeOrException(origin.getStatus());
     result.timeCreated = origin.getTimeCreated();
     result.timeUpdated = origin.getTimeUpdated();
     return result;

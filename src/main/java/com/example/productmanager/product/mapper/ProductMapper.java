@@ -19,4 +19,8 @@ public interface ProductMapper {
   List<ProductDO> fuzzyQueryProductByName(@Param("fuzzyName") String fuzzyName);
 
   List<ProductDO> findByNames(@Param("nameList") List<String> names);
+
+  Integer update(ProductDO productDO);
+
+  Integer delete(@Param("id") Long id);
 }
