@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.productmanager.product.mapper.ProductMapper">
-    <select id="listProduct" resultType="com.example.productmanager.product.DO.ProductDO">
+    <select id="listProduct" resultMap="product">
         select * from product
     </select>
 
@@ -11,15 +11,15 @@
         insert into product(NAME, PRICE, STATUS, TIME_CREATED, TIME_UPDATED) values(#{name}, #{price}, #{status}, NOW(), NOW())
     </insert>
 
-    <select id="getProductByName" parameterType="java.lang.String" resultType="com.example.productmanager.product.DO.ProductDO">
+    <select id="getProductByName" parameterType="java.lang.String" resultMap="product">
         select * from product where NAME = #{name}
     </select>
 
-    <select id="fuzzyQueryProductByName" parameterType="java.lang.String" resultType="com.example.productmanager.product.DO.ProductDO">
+    <select id="fuzzyQueryProductByName" parameterType="java.lang.String" resultMap="product">
         select * from product where NAME like '%${fuzzyName}%'
     </select>
 
-    <select id="findByNames" resultType="com.example.productmanager.product.DO.ProductDO">
+    <select id="findByNames" resultMap="product">
         select * from product where NAME in 
         <foreach collection="nameList" item="name" open="(" close=")" separator=",">
             #{name}
@@ -43,4 +43,13 @@
     <update id="delete" parameterType="java.lang.Long">
         update product set TIME_UPDATED = NOW(), STATUS = 'D' where ID = #{id}
     </update>
+
+    <resultMap id="product" type="com.example.productmanager.product.DO.ProductDO">
+        <id column="id" property="id" />
+        <result column="NAME" property="name" />
+        <result column="PRICE" property="price" />
+        <result column="STATUS" property="status" />
+        <result column="TIME_CREATED" property="timeCreated" />
+        <result column="TIME_UPDATED" property="timeUpdated" />
+    </resultMap>
 </mapper>

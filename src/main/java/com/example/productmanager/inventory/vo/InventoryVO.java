@@ -13,4 +13,12 @@ public class InventoryVO {
   private String productName; // 进货的商品名
   private Long quantity; // 进货的数量
   private BigDecimal amount; // 该类商品总价
+
+  public InventoryVO(String productName, Long quantity, BigDecimal amount) {
+    this.productName = productName;
+    this.quantity = quantity;
+    this.amount = amount;
+  }
+
+  public InventoryVO() {}
 }

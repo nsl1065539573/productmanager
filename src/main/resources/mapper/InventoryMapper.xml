@@ -6,11 +6,48 @@
     <insert id="batchInsert" parameterType="com.example.productmanager.inventory.DO.InventoryDO">
         INSERT INTO product_inventory(PRODUCT_ID, PRODUCT_PURCHASING_PRICE, QUANTITY, TIME_CREATED, TIME_UPDATE) VALUES
         <foreach collection="inventoryDOS" separator="," item="item">
-            (#{item.productId},#{item.productPurchasingPrice},#{item.quantity},#{item.timeCreated},#{item.timeUpdated})
+            (#{item.productId},#{item.productPurchasingPrice},#{item.quantity},NOW(),NOW())
         </foreach>
     </insert>
 
-    <select id="listAll" resultType="com.example.productmanager.inventory.DO.InventoryDO">
+    <select id="listAll" resultMap="inventory">
         select * from product_inventory
     </select>
+
+    <select id="listByProductIds" resultMap="inventory">
+        select * from product_inventory where PRODUCT_ID in
+        <foreach collection="productIds" item="item" separator="," open="(" close=")">
+            #{item}
+        </foreach>
+        and QUANTITY > 0
+        order by TIME_CREATED
+    </select>
+
+    <update id="updateInventory" parameterType="com.example.productmanager.inventory.DO.InventoryDO">
+        update product_inventory set QUANTITY = #{quantity} where ID = #{id}
+    </update>
+
+    <update id="batchUpdateInventory" parameterType="com.example.productmanager.inventory.DO.InventoryDO">
+        update product_inventory
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="QUANTITY = case" suffix="end,">
+                <foreach collection="list" item="item">
+                    when id = #{item.id} then #{item.quantity}
+                </foreach>
+            </trim>
+        </trim>
+        where ID in
+        <foreach collection="list" item="item" separator="," open="(" close=")">
+            #{item.id}
+        </foreach>
+    </update>
+
+    <resultMap id="inventory" type="com.example.productmanager.inventory.DO.InventoryDO">
+        <id column="id" property="id" />
+        <result column="PRODUCT_ID" property="productId" />
+        <result column="QUANTITY" property="quantity" />
+        <result column="PRODUCT_PURCHASING_PRICE" property="productPurchasingPrice" />
+        <result column="TIME_CREATED" property="timeCreated" />
+        <result column="TIME_UPDATE" property="timeUpdated" />
+    </resultMap>
 </mapper>

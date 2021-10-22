@@ -28,6 +28,8 @@ public class BaseTest {
 
   public String productName;
   public Long productId;
+  public String productName1;
+  public Long productId1;
 
   @Test
   public void clearDB() {
@@ -52,5 +54,15 @@ public class BaseTest {
     productDO = productMapper.getProductByName("testProduct");
     this.productId = productDO.getId();
     this.productName = productDO.getName();
+  }
+
+  public void setProduct1() {
+    ProductDO productDO = new ProductDO();
+    productDO.setName("testProduct1");
+    productDO.setPrice(BigDecimal.TEN);
+    productMapper.addProduct(productDO);
+    productDO = productMapper.getProductByName("testProduct1");
+    this.productId1 = productDO.getId();
+    this.productName1 = productDO.getName();
   }
 }
